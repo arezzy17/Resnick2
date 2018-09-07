@@ -20,45 +20,77 @@ window.onload = function init()
     points = [];
     var numTris =Math.random()*100+50;
     var totalTris = numTris;
-    var height;
-    for(height = -1; height<=1; height=height+.05){
-        for(var i = -10; i <= 10; i++){
-            points.push(vec2(i*.1,height));
-            points.push(vec2(i*.1+.05,height+.05));
-            points.push(vec2(i*.1+.1,height));
     
-            colors.push(vec3(.0,.412,.58));
-            colors.push(vec3(.0,.412,.58));
-            colors.push(vec3(.0,.412,.58));
+    for(var height = -10; height<=10; height+=.5){
+        for(var width = -10; width <= 10; width++){
+            points.push(vec2(width*.1,height*.1));
+            points.push(vec2(width*.1+.05,height*.1+.05));
+            points.push(vec2(width*.1+.1,height*.1));
     
-            points.push(vec2(i*.1-.05,height+.05));
-            points.push(vec2(i*.1,height));
-            points.push(vec2(i*.1+.05,height+.05));
+            colors.push(getColor(width, height));
+            colors.push(getColor(width, height));
+            colors.push(getColor(width, height));
     
-            colors.push(vec3(.0,.467,.745));
-            colors.push(vec3(.0,.467,.745));
-            colors.push(vec3(.0,.467,.745));
+            points.push(vec2(width*.1-.05,height*.1+.05));
+            points.push(vec2(width*.1,height*.1));
+            points.push(vec2(width*.1+.05,height*.1+.05));
+    
+            colors.push(getColor2(width, height));
+            colors.push(getColor2(width, height));
+            colors.push(getColor2(width, height));
             totalTris+=2;
         }
     }
-    
-    for(var i = 0; i < numTris; i++){
+    function getColor(width, height, opp = false){
+        if(opp){
+            width*=-1;
+            height*=-1;
+        }
+        width+=10;
+        height+=10;
+        var r = 1-width/20;
+        var b = width/30;
+        var g = .275;
 
-        var x1 = (Math.random()-.5)*2;
-        var x2 = (Math.random()-.5)*2;
-        var y1= x1+(Math.random()* - .5);
-        var y2= x2+(Math.random()* -.5);
-        var z1= y1 - (Math.random()* - .5);
-        var z2= y2 -  (Math.random()* - .5);
-
-        points.push(vec2(x1, x2));
-        points.push(vec2(y1, y2));
-        points.push(vec2(z1, z2));
-
-        colors.push(vec3(Math.random(),Math.random(),Math.random()));
-        colors.push(vec3(Math.random(),Math.random(),Math.random()));
-        colors.push(vec3(Math.random(),Math.random(),Math.random()));
+        r*=height/20+.25;
+        g*=height/20+.25;
+        b*=height/20+.25;
+        return vec3(r,g,b);
     }
+    function getColor2(width, height, opp = false){
+        if(opp){
+            width*=-1;
+            height*=-1;
+        }
+        width+=10;
+        height+=10;
+        var r = .25;
+        var b = width/20;
+        var g = 1-width/20;
+
+        r*=height/20+.25;
+        g*=height/20+.25;
+        b*=height/20+.25;
+        return vec3(r,g,b);
+    }
+    
+    // for(var i = 0; i < numTris; i++){
+
+    //     var x1 = (Math.random()-.5)*2;
+    //     var x2 = (Math.random()-.5)*2;
+    //     var y1= x1+(Math.random()* - .5);
+    //     var y2= x2+(Math.random()* -.5);
+    //     var z1= y1 - (Math.random()* - .5);
+    //     var z2= y2 -  (Math.random()* - .5);
+
+    //     points.push(vec2(x1, x2));
+    //     points.push(vec2(y1, y2));
+    //     points.push(vec2(z1, z2));
+
+    //     colors.push(vec3(Math.random(),Math.random(),Math.random()));
+    //     colors.push(vec3(Math.random(),Math.random(),Math.random()));
+    //     colors.push(vec3(Math.random(),Math.random(),Math.random()));
+    // }
     canvas.addEventListener("click",function(){
         alert("There are " + Math.floor(totalTris) + " triangles on the screen");
     })
