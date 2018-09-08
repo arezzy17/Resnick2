@@ -18,8 +18,7 @@ window.onload = function init()
 
     // And, add our vertices point into our array of points
     points = [];
-    var numTris =Math.random()*100+50;
-    var totalTris = numTris;
+    var totalTris = 0;
     
     for(var height = -10; height<=10; height+=.5){
         for(var width = -10; width <= 10; width++){
@@ -73,24 +72,7 @@ window.onload = function init()
         b*=height/20+.25;
         return vec3(r,g,b);
     }
-    
-    // for(var i = 0; i < numTris; i++){
 
-    //     var x1 = (Math.random()-.5)*2;
-    //     var x2 = (Math.random()-.5)*2;
-    //     var y1= x1+(Math.random()* - .5);
-    //     var y2= x2+(Math.random()* -.5);
-    //     var z1= y1 - (Math.random()* - .5);
-    //     var z2= y2 -  (Math.random()* - .5);
-
-    //     points.push(vec2(x1, x2));
-    //     points.push(vec2(y1, y2));
-    //     points.push(vec2(z1, z2));
-
-    //     colors.push(vec3(Math.random(),Math.random(),Math.random()));
-    //     colors.push(vec3(Math.random(),Math.random(),Math.random()));
-    //     colors.push(vec3(Math.random(),Math.random(),Math.random()));
-    // }
     canvas.addEventListener("click",function(){
         alert("There are " + Math.floor(totalTris) + " triangles on the screen");
     })
